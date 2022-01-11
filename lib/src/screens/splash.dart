@@ -15,20 +15,20 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
-  late final Duration duration;
   @override
   void initState() {
-    animationController = AnimationController(duration: duration, vsync: this)
-      ..forward()
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      HomePage(controller: widget.settingsController)));
-        }
-      });
+    animationController =
+        AnimationController(duration: (const Duration(seconds: 3)), vsync: this)
+          ..forward()
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          HomePage(controller: widget.settingsController)));
+            }
+          });
     super.initState();
   }
 
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen>
           color: Colors.white,
         ),
         Image.asset(
-          'assets/logo.png',
+          'assets/weather.png',
           fit: BoxFit.cover,
           repeat: ImageRepeat.noRepeat,
           width: 170.0,
