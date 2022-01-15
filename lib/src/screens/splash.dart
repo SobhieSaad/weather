@@ -25,8 +25,9 @@ class _SplashScreenState extends State<SplashScreen>
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          HomePage(controller: widget.settingsController)));
+                      builder: (BuildContext context) => HomePage(
+                            controller: widget.settingsController,
+                          )));
             }
           });
     super.initState();
@@ -42,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>
           color: Colors.white,
         ),
         Image.asset(
-          'assets/weather.png',
+          'assets/images/weather.png',
           fit: BoxFit.cover,
           repeat: ImageRepeat.noRepeat,
           width: 170.0,

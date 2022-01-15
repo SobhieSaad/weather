@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:weather/src/api/open_weather_api.dart';
+import 'package:weather/src/models/location.dart';
 import 'package:weather/src/models/weather.dart';
 import 'package:weather/src/settings/settings_controller.dart';
-import 'package:weather/src/widgets/additional_information.dart';
+import 'package:weather/src/widgets/app_bar.dart';
+import 'package:weather/src/widgets/cirt_drop_down_selection.dart';
 import 'package:weather/src/widgets/current_weather.dart';
+import 'package:weather/src/widgets/forcast_view_daily.dart';
+import 'package:weather/src/widgets/forcast_views_hourly.dart';
+import 'package:weather/src/widgets/weatherBox.dart';
+import 'package:weather/src/widgets/weatherDetailsBox.dart';
 
 class HomePage extends StatefulWidget {
   SettingsController controller;
@@ -15,11 +21,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   WeatherApiClient client = WeatherApiClient();
-
-  Weather? data;
-  Future<void> getData() async {
-    data = await client.getCurrentWeather("Syria");
-  }
+  List<Location> locations = [
+    Location(
+        city: "Arbil", country: "Iraq", lat: "35.5636634", lon: "45.4695083")
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,38 +45,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: FutureBuilder(
-          future: getData(),
+          future: getCurrentWeather(locations[0]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  currentWeather(
-                    Icons.wb_sunny_rounded,
-                    "${data!.temp}",
-                    "${data!.cityName}",
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  const Text(
-                    "Additional information",
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      color: Color(0xdd212121),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // CityDropDown(locations),
+                  createAppBar(locations, locations[0], context),
+                  weatherBox(snapshot.data as Weather),
+                  weatherDetailsBox(snapshot.data as Weather),
+                  forcastViewsHourly(locations[0]),
                   const Divider(),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  additionlInformation(
-                    "${data!.wind}",
-                    "${data!.humidity}",
-                    "${data!.pressure}",
-                    "${data!.feels_like}",
-                  ),
+                  forcastViewsDaily(locations[0]),
                 ],
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
