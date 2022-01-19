@@ -12,15 +12,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   flutter_localizations:
     sdk: flutter
   geolocator: ^8.0.1
   http: ^0.13.4
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  google_maps_flutter: ^2.1.1
+  location: ^4.3.0  
   flutter_lints: ^1.0.0
 
 flutter:
