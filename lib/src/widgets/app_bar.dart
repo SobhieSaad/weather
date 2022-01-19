@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/src/models/location.dart';
+import 'package:weather/src/widgets/get_user_location.dart';
 
 Widget createAppBar(
     List<Location> locations, Location location, BuildContext context) {
@@ -18,29 +20,37 @@ Widget createAppBar(
               offset: const Offset(0, 3),
             )
           ]),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text.rich(
-            TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: '${location.city}, ',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16)),
-                TextSpan(
-                    text: location.country,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.normal, fontSize: 16)),
-              ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) {
+            return const GetCurrentLocaitonDetails();
+          }));
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text.rich(
+              TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                      text: '${location.city}, ',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  TextSpan(
+                      text: location.country,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 16)),
+                ],
+              ),
             ),
-          ),
-          const Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: Colors.black,
-            size: 24.0,
-            semanticLabel: 'Tap to change location',
-          ),
-        ],
+            const Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: Colors.black,
+              size: 24.0,
+              semanticLabel: 'Tap to change location',
+            ),
+          ],
+        ),
       ));
 }
