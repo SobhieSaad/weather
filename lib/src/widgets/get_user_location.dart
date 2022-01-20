@@ -18,36 +18,45 @@ class _GetCurrentLocaitonDetailsState extends State<GetCurrentLocaitonDetails> {
   Location location = Location();
 
   void _onMapCreated(GoogleMapController _cntlr) {
-    _controller = _cntlr;
-    location.onLocationChanged.listen((l) {
-      _controller.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-              target: LatLng(l.latitude as double, l.longitude as double),
-              zoom: 15),
-        ),
-      );
-    });
+    if (initialcameraposition.latitude == 0 &&
+        initialcameraposition.longitude == 0) {
+      _controller = _cntlr;
+      location.onLocationChanged.listen((l) {
+        // ignore: avoid_print
+        setState(() {
+          initialcameraposition =
+              LatLng(l.latitude as double, l.longitude as double);
+        });
+        _controller.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target: LatLng(l.latitude as double, l.longitude as double),
+                zoom: 12),
+          ),
+        );
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: sized_box_for_whitespace
     return Scaffold(
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            GoogleMap(
-              initialCameraPosition:
-                  CameraPosition(target: initialcameraposition),
-              mapType: MapType.normal,
-              onMapCreated: _onMapCreated,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-            ),
-          ],
-        ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition:
+                CameraPosition(target: initialcameraposition),
+            mapType: MapType.normal,
+            onMapCreated: initialcameraposition.latitude == 0 &&
+                    initialcameraposition.longitude == 0
+                ? _onMapCreated
+                : null,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+          ),
+        ],
       ),
     );
   }

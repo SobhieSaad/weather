@@ -22,8 +22,17 @@ Widget createAppBar(
           ]),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) {
+          // BuildContext dialogContext; // <<----
+          // showDialog(
+          //   context: context, // <<----
+          //   barrierDismissible: true,
+          //   builder: (BuildContext context) {
+          //     dialogContext = context;
+          //     return const Dialog(child: GetCurrentLocaitonDetails());
+          //   },
+          // );
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return const GetCurrentLocaitonDetails();
           }));
         },
