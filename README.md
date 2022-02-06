@@ -28,3 +28,7 @@ the `lib/src/localization` directory.
 To support additional languages, please visit the tutorial on
 [Internationalizing Flutter
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+ 
+## Screenshots
+### splashscreen:
+<img src="https://github.com/SobhieSaad/weather/blob/master/Screenshot_20220206_221556_com.example.weather.jpg">
