@@ -30,5 +30,9 @@ To support additional languages, please visit the tutorial on
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
  
 ## Screenshots
-### splashscreen:
+### Splashscreen:
 <img src="https://github.com/SobhieSaad/weather/blob/master/Screenshot_20220206_221556_com.example.weather.jpg">
+### Main screen
+<img src="https://github.com/SobhieSaad/weather/blob/master/Screenshot_20220206_221559_com.example.weather.jpg">
+
+
