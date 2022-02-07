@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/src/home.dart';
+import 'package:weather/src/models/location.dart';
 import 'package:weather/src/settings/settings_controller.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,6 +28,13 @@ class _SplashScreenState extends State<SplashScreen>
                   MaterialPageRoute(
                       builder: (BuildContext context) => HomePage(
                             controller: widget.settingsController,
+                            locations: [
+                              Location(
+                                  city: "Sulaymaniyah",
+                                  country: "Iraq",
+                                  lat: "35.5636634",
+                                  lon: "45.4695083")
+                            ],
                           )));
             }
           });

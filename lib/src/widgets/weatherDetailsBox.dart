@@ -3,7 +3,7 @@ import 'package:weather/src/models/weather.dart';
 
 Widget weatherDetailsBox(Weather _weather) {
   return Container(
-    padding: const EdgeInsets.only(left: 15, top: 25, bottom: 25, right: 15),
+    padding: const EdgeInsets.only(left: 15, top: 15, bottom: 25, right: 15),
     margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5, right: 15),
     decoration: BoxDecoration(
         color: Colors.white,
