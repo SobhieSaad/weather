@@ -5,11 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
-import 'package:weather/src/models/CityCountry.dart';
+import 'package:weather/src/home.dart';
+import 'package:weather/src/models/location.dart' as locationModel;
+import 'package:weather/src/settings/settings_controller.dart';
 import 'package:weather/src/widgets/get_city_country_by_cords.dart';
 
 class GetCurrentLocaitonDetails extends StatefulWidget {
-  const GetCurrentLocaitonDetails({Key? key}) : super(key: key);
+  SettingsController controller;
+  List<locationModel.Location> locationsList = [];
+  GetCurrentLocaitonDetails(
+      {Key? key, required this.controller, required locationsList})
+      : super(key: key);
 
   @override
   State<GetCurrentLocaitonDetails> createState() =>
@@ -41,6 +47,7 @@ class _GetCurrentLocaitonDetailsState extends State<GetCurrentLocaitonDetails> {
   @override
   void initState() {
     super.initState();
+
     _child = Container();
     cc = null;
     getLocation(context);
@@ -126,66 +133,80 @@ class _GetCurrentLocaitonDetailsState extends State<GetCurrentLocaitonDetails> {
     }
     // ignore: sized_box_for_whitespace
     return Material(
-      child: Scaffold(
-        body: Stack(children: <Widget>[
-          Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                height: 100,
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 40, horizontal: 12),
-                    child: Column(
-                      children: [
-                        Text(
-                          cc!.city.toString() + ", " + cc!.country.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        const Divider(),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print(cc.city);
-                          },
-                          child: Container(
-                            width: 150,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.lightBlue,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Confirm",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
-                                ),
+      child: Stack(children: <Widget>[
+        Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              height: 100,
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 40, horizontal: 12),
+                  child: Column(
+                    children: [
+                      Text(
+                        cc!.city.toString() + ", " + cc!.country.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => HomePage(
+                                        controller: widget.controller,
+                                        locations: [
+                                          locationModel.Location(
+                                              city: cc.city,
+                                              country: cc.country,
+                                              lat: (initialCameraTarget
+                                                      ?.latitude)
+                                                  .toString(),
+                                              lon: (initialCameraTarget
+                                                      ?.longitude)
+                                                  .toString())
+                                        ])),
+                          );
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.lightBlue,
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Confirm",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    )),
-              )),
-          //Map
-          Positioned(
-            top: 120,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: _child,
-          ),
-        ]),
-      ),
+                        ),
+                      )
+                    ],
+                  )),
+            )),
+        //Map
+        Positioned(
+          top: 120,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: _child,
+        ),
+      ]),
     );
   }
 }

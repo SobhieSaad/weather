@@ -16,5 +16,6 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
+  // ignore: invalid_use_of_visible_for_testing_member
   runApp(MyApp(settingsController: settingsController));
 }
