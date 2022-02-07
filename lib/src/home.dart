@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather/src/api/open_weather_api.dart';
 import 'package:weather/src/models/location.dart';
 import 'package:weather/src/models/weather.dart';
-import 'package:weather/src/provider/location_provider.dart';
 import 'package:weather/src/settings/settings_controller.dart';
 import 'package:weather/src/widgets/app_bar.dart';
 import 'package:weather/src/widgets/forcast_view_daily.dart';
