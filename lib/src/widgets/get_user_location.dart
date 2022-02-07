@@ -6,11 +6,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather/src/home.dart';
-import 'package:weather/src/models/CityCountry.dart';
 import 'package:weather/src/models/location.dart' as locationModel;
 import 'package:weather/src/settings/settings_controller.dart';
 import 'package:weather/src/widgets/get_city_country_by_cords.dart';
-import 'package:weather/src/widgets/weatherBox.dart';
 
 class GetCurrentLocaitonDetails extends StatefulWidget {
   SettingsController controller;
