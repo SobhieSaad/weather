@@ -30,12 +30,14 @@ To support additional languages, please visit the tutorial on
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
 
 ## Details 
-#### Using Google maos APIs to get user location
+#### Using Google maps APIs to get user location
+https://console.developers.google.com/
 
 #### Useing Open Weather API to grt weather situations
+https://openweathermap.org/api
 
 #### Using Open cage API to get city name since Google geocoder is not free
-
+https://opencagedata.com/api
 
 
 
